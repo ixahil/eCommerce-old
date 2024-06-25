@@ -7,8 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/bin/www",
-    "start": "node ./src/bin/www",
-    "vercel-build": "echo hello"
+    "start": "node ./src/bin/www"
   },
   "keywords": [],
   "author": "",

@@ -4,7 +4,7 @@ import { DBConnection, getConfig } from "../config/index.js";
 const port = getConfig.get("port");
 const startServer = () => {
   app.listen(port, () => {
-    console.log("\n ⚙️  Server listening on: " + port);
+    console.log(" ⚙️  Server listening on: " + port);
   });
 };
 
