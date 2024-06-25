@@ -6,25 +6,31 @@ import { fileURLToPath } from "node:url";
 import path, { dirname } from "node:path";
 import expressListEndpoints from "express-list-endpoints";
 
-const __dirname = dirname(dirname(fileURLToPath(import.meta.url)));
+// const __dirname = dirname(dirname(fileURLToPath(import.meta.url)));
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://localhost:3001"],
+    origin: process.env.ORIGIN,
     credentials: true,
   })
 );
+app.use(express.static("./public"));
+app.set("views", path.join(__dirname, "../views"));
 
-app.use("/public", express.static(path.join(__dirname, "public")));
+// app.use("/public", express.static(path.join(__dirname, "public")));
 
 app.use(express.json({ limit: "15mb" }));
 app.use(express.urlencoded({ extended: true, limit: "15mb" }));
 app.use(cookieParser());
 app.use(morgan("dev"));
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views/pages"));
+// app.set("views", path.join(__dirname, "views/pages"));
+// app.set("view engine", "ejs");
 
 // app.use(fileUpload());
 
@@ -49,7 +55,7 @@ app.use("/api/v1/brands", brandRouter);
 // Define your routes here
 app.get("/", (req, res) => {
   const endpoints = expressListEndpoints(app);
-  res.render("index", { endpoints });
+  res.render("pages/index", { endpoints });
 });
 
 app.use("*", (req, res, next) => {
@@ -65,4 +71,4 @@ import { errorHandler } from "./middlewares/error.middleware.js";
 // Error Handler Middlewares
 app.use(errorHandler);
 
-export { app };
+export default app;

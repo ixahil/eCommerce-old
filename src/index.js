@@ -1,6 +1,5 @@
-import { app } from "../app.js";
-import { DBConnection, getConfig } from "../config/index.js";
-
+import { DBConnection, getConfig } from "./config/index.js";
+import app from "./app.js";
 const port = getConfig.get("port");
 const startServer = () => {
   app.listen(port, () => {
