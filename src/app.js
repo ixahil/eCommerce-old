@@ -43,6 +43,13 @@ app.use("/api/v1/orders", orderRouter);
 app.use("/api/v1/collections", collectionRouter);
 app.use("/api/v1/brands", brandRouter);
 
+app.use("/api/v1", (req, res, next) => {
+  res.status(200).json({
+    status: "success",
+    message: "Page not found",
+  });
+});
+
 app.use("*", (req, res, next) => {
   res.status(404).json({
     status: "fail",
