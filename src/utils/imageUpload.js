@@ -33,7 +33,6 @@ export const moveImage = async (req, folder, postfix) => {
   }
   const dir = `public/static/${folder}/${postfix}`;
   const imageObj = {};
-
   const fields = Object.keys(req.files);
 
   for (const field of fields) {
