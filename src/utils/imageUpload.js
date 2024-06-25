@@ -14,9 +14,22 @@ const generateImagePath = (dir, prefix, postfix, file) => {
 
 export const moveImage = async (req, folder, postfix) => {
   if (!req.files) {
-    const url = getStaticPath(req, "public/static/placeholders", "user.jpg");
-    const localPath = getLocalPath("public/static/placeholders", "user.jpg");
-    return { avatar: [{ url, localPath }] };
+    if (folder === "products/images") {
+      const url = getStaticPath(
+        req,
+        "public/static/placeholders",
+        "product-placeholder.png"
+      );
+      const localPath = getLocalPath(
+        "public/static/placeholders",
+        "product-placeholder.png"
+      );
+      return { mainImage: [{ url, localPath }] };
+    } else {
+      const url = getStaticPath(req, "public/static/placeholders", "user.jpg");
+      const localPath = getLocalPath("public/static/placeholders", "user.jpg");
+      return { avatar: [{ url, localPath }] };
+    }
   }
   const dir = `public/static/${folder}/${postfix}`;
   const imageObj = {};

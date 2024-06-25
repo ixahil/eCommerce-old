@@ -25,11 +25,16 @@ export const getProductsByCollection = asyncHandler(async (req, res, next) => {
 
   page = parseInt(page) || 1;
   limit = parseInt(limit) || 8;
+  const brands = req.query.brand?.split(",") || [];
 
   const { collection } = req.params;
-
   const pipeline = [
-    { $match: { "collections.handle": { $regex: collection, $options: "i" } } },
+    {
+      $match: {
+        "collections.handle": collection,
+        ...(brands.length > 0 && { "brand.handle": { $in: brands } }),
+      },
+    },
     { $sort: { timestamp: -1 } },
     {
       $facet: {
@@ -66,8 +71,6 @@ export const getProductsByCollection = asyncHandler(async (req, res, next) => {
   ];
 
   const products = await ProductModel.aggregate(pipeline);
-
-  console.log(products);
 
   res.status(200).json(new ApiResponse(200, products[0]));
 });
@@ -204,6 +207,7 @@ export const deleteProduct = asyncHandler(async (req, res, next) => {
 
 export const getProducts = asyncHandler(async (req, res, next) => {
   let { keywords, page, limit, viewId } = req.query;
+  const brands = req.query.brand?.split(",") || [];
 
   const filter = ProductFilters.find((filter) => filter.viewId === viewId);
 
@@ -244,6 +248,7 @@ export const getProducts = asyncHandler(async (req, res, next) => {
   keywords &&
     queries.push({
       $match: {
+        ...(brands.length > 0 && { "brand.handle": { $in: brands } }),
         $or: [
           { name: { $regex: keywords, $options: "i" } },
           { sku: { $regex: keywords, $options: "i" } },
