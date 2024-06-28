@@ -1,4 +1,3 @@
-import Cart from "@/components/public/cart/Cart";
 import Announcement from "@/components/public/header/announcement";
 import PublicHeader from "@/components/public/header/public-header";
 

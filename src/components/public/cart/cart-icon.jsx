@@ -3,7 +3,7 @@ import { cartSelector, toggleCart } from "@/services/redux/slice/cart-slice";
 import { ShoppingBag } from "lucide-react";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Cart from "./Cart";
+import Cart from "./cart";
 
 const CartIcon = () => {
   const dispatch = useDispatch();
