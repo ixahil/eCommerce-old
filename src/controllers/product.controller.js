@@ -7,8 +7,8 @@ import {
   asyncHandler,
   moveImage,
 } from "../utils/index.js";
-import { faker } from "@faker-js/faker";
-import crypto, { randomUUID } from "crypto";
+// import { faker } from "@faker-js/faker";
+// import crypto, { randomUUID } from "crypto";
 
 export const updateProductStatus = asyncHandler(async (req, res, next) => {
   const { sku } = req.params;
@@ -273,100 +273,100 @@ export const getAProduct = asyncHandler(async (req, res, next) => {
 
 //// Gnerating and saving faker products data
 // Data Generating
-const collections = [
-  "Men's Collection",
-  "Women's Collection",
-  "Bags",
-  "Accessories",
-  "Gears",
-  "Sale",
-  "Clearance",
-];
+// const collections = [
+//   "Men's Collection",
+//   "Women's Collection",
+//   "Bags",
+//   "Accessories",
+//   "Gears",
+//   "Sale",
+//   "Clearance",
+// ];
 
-const owners = [
-  { _id: "664241c0d07aeb94805c5478" },
-  { _id: "66425bcbc3aa190afbf3a215" },
-];
+// const owners = [
+//   { _id: "667f0eddeccce695e1ced940" },
+//   { _id: "667f0f0eeccce695e1ced959" },
+// ];
 
-const brands = [
-  "Nike",
-  "Adidas",
-  "Apple",
-  "Samsung",
-  "Google",
-  // Add more brands as needed
-];
+// const brands = [
+//   "Nike",
+//   "Adidas",
+//   "Apple",
+//   "Samsung",
+//   "Google",
+//   // Add more brands as needed
+// ];
 
-const dataGenerator = async (start, end) => {
-  for (let i = start; i < end; i++) {
-    const randomIndex = Math.floor(Math.random() * collections.length);
-    const randomIndexOwner = Math.floor(Math.random() * owners.length);
-    const randomBrands = Math.floor(Math.random() * brands.length);
-    const collection = collections[randomIndex];
-    const owner = owners[randomIndexOwner];
-    const brand = brands[randomBrands];
+// const dataGenerator = async (start, end) => {
+//   for (let i = start; i < end; i++) {
+//     const randomIndex = Math.floor(Math.random() * collections.length);
+//     const randomIndexOwner = Math.floor(Math.random() * owners.length);
+//     const randomBrands = Math.floor(Math.random() * brands.length);
+//     const collection = collections[randomIndex];
+//     const owner = owners[randomIndexOwner];
+//     const brand = brands[randomBrands];
 
-    const product = {
-      owner: owner,
-      sku: `SKU ${i}`,
-      isFeatured: Math.random() < 0.5,
-      isFreeShipping: Math.random() < 0.5,
-      isVisible: true,
-      name: faker.commerce.product() + " Product",
-      brand: {
-        name: brand,
-      },
-      price: faker.commerce.price({ min: 10, max: 1000, dec: 2 }),
-      stock: faker.number.int(100),
-      description: faker.lorem.paragraphs(),
-      collections: {
-        name: collection,
-      },
-      mainImage: {
-        url: "http://localhost:8080/public/static/placeholders/product-placeholder.png",
-        localPath: faker.string.uuid(),
-      },
-      subImages: [
-        {
-          url: "http://localhost:8080/public/static/placeholders/product-placeholder.png",
-          localPath: faker.string.uuid(),
-        },
-        {
-          url: "http://localhost:8080/public/static/placeholders/product-placeholder.png",
-          localPath: faker.string.uuid(),
-        },
-      ],
-    };
+//     const product = {
+//       owner: owner,
+//       sku: `SKU ${i}`,
+//       isFeatured: Math.random() < 0.5,
+//       isFreeShipping: Math.random() < 0.5,
+//       isVisible: true,
+//       name: faker.commerce.product() + " Product",
+//       brand: {
+//         name: brand,
+//       },
+//       price: faker.commerce.price({ min: 10, max: 1000, dec: 2 }),
+//       stock: faker.number.int(100),
+//       description: faker.lorem.paragraphs(),
+//       collections: {
+//         name: collection,
+//       },
+//       mainImage: {
+//         url: "https://api-ecommerce.sahildev.pro/public/static/placeholders/product-placeholder.png",
+//         localPath: faker.string.uuid(),
+//       },
+//       subImages: [
+//         {
+//           url: "https://api-ecommerce.sahildev.pro/public/static/placeholders/product-placeholder.png",
+//           localPath: faker.string.uuid(),
+//         },
+//         {
+//           url: "https://api-ecommerce.sahildev.pro/public/static/placeholders/product-placeholder.png",
+//           localPath: faker.string.uuid(),
+//         },
+//       ],
+//     };
 
-    // let createdProduct = await ProductModel.create(product);
-    // const newCategory = await CollectionModal.findOneAndCreate(
-    //   createdProduct,
-    //   product.collection
-    // );
-    // createdProduct.collections._id = newCategory._id;
-    // createdProduct.collections.handle = newCategory.handle;
+//     // let createdProduct = await ProductModel.create(product);
+//     // const newCategory = await CollectionModal.findOneAndCreate(
+//     //   createdProduct,
+//     //   product.collection
+//     // );
+//     // createdProduct.collections._id = newCategory._id;
+//     // createdProduct.collections.handle = newCategory.handle;
 
-    // await createdProduct.save();
+//     // await createdProduct.save();
 
-    await ProductModel.createNewProduct(product, product.owner);
-  }
-};
+//     await ProductModel.createNewProduct(product, product.owner);
+//   }
+// };
 
-const generateAndSaveProducts = async () => {
-  // Generate products
-  const generatedProducts = dataGenerator(1, 50);
+// const generateAndSaveProducts = async () => {
+//   // Generate products
+//   const generatedProducts = dataGenerator(1, 50);
 
-  // try {
-  //   // Save generated products to the database
-  //   const savedProducts = await ProductModel.insertMany(generatedProducts);
-  //   savedProducts.forEach(async (product) => {
-  //     const category = await CategoryModel.findOneAndCreate(product);
-  //     product.category._id = category._id;
-  //     await product.save();
-  //   });
-  // } catch (error) {
-  //   console.error("Error saving products:", error);
-  // }
-};
+//   // try {
+//   //   // Save generated products to the database
+//   //   const savedProducts = await ProductModel.insertMany(generatedProducts);
+//   //   savedProducts.forEach(async (product) => {
+//   //     const category = await CategoryModel.findOneAndCreate(product);
+//   //     product.category._id = category._id;
+//   //     await product.save();
+//   //   });
+//   // } catch (error) {
+//   //   console.error("Error saving products:", error);
+//   // }
+// };
 
-// generateAndSaveProducts();
+// // generateAndSaveProducts();
