@@ -14,7 +14,7 @@ const AuthProvider = ({ children, layout }) => {
   if (isLoading) {
     return <LoadingSpinner />;
   } else if (user?.role !== layout) {
-    return router.back();
+    return router.push("/");
   } else {
     return children;
   }

@@ -1,8 +1,14 @@
-import { ShoppingCartIcon } from "lucide-react";
 import Image from "next/image";
+import CartIcon from "../cart/cart-icon";
 import { Collections } from "./Collections";
 import HeaderSearch from "./header-search";
 import SideComponent from "./side-components";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+
+const NoSSRCartIcon = dynamic(() => import("../cart/cart-icon"), {
+  ssr: false,
+});
 
 const PublicHeader = () => {
   return (
@@ -14,7 +20,8 @@ const PublicHeader = () => {
         </div>
         <div className="col-span-2 flex items-center gap-8">
           <SideComponent />
-          <ShoppingCartIcon />
+          {/* <ShoppingCartIcon /> */}
+          <NoSSRCartIcon />
         </div>
       </div>
       <Collections />
@@ -24,10 +31,10 @@ const PublicHeader = () => {
 
 const Logo = () => {
   return (
-    <div className="flex items-end gap-4 col-span-2">
+    <Link href={"/"} className="flex items-end gap-4 col-span-2">
       <Image src={"/logo.png"} width={50} height={50} alt="logo" />
       <h1 className="text-4xl font-extrabold italic">PLR</h1>
-    </div>
+    </Link>
   );
 };
 

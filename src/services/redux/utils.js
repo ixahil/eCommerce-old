@@ -62,9 +62,9 @@ export const saveToLocalStorage = (state, name) => {
   }
 };
 
-export const loadFromLocalStorage = () => {
+export const loadFromLocalStorage = (item) => {
   try {
-    const serializedState = window.localStorage.getItem("cart");
+    const serializedState = window.localStorage.getItem(item);
 
     if (serializedState === null) return undefined;
     return JSON.parse(serializedState);
