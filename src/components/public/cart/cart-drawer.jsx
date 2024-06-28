@@ -11,7 +11,7 @@ import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-const Cart = () => {
+const CartDrawer = () => {
   const { cartItems, totalPrice, showCart } = useSelector(cartSelector);
   const cartRef = useRef();
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const Cart = () => {
     };
   }, [cartRef]);
 
-  const cart = () => (
+  const cart = (
     <div
       className="h-screen w-72 border-2 fixed top-0 right-0 bg-white py-10 px-6"
       ref={cartRef}
@@ -108,4 +108,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default CartDrawer;

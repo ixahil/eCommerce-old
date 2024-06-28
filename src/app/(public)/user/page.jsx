@@ -46,7 +46,7 @@ const UserHome = () => {
 
   useEffect(() => {
     const fetchFiles = async () => {
-      const files = await convertUrlsToFiles([profile.avatar.url]);
+      const files = await convertUrlsToFiles([profile?.avatar?.url]);
       setValue("avatar", files[0]);
     };
 

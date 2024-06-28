@@ -4,6 +4,8 @@ const nextConfig = {
     remotePatterns: [
       {
         hostname: "localhost",
+      },
+      {
         hostname: "api-ecommerce.sahildev.pro",
       },
     ],

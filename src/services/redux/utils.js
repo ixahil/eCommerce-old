@@ -24,7 +24,7 @@ export const errorHandler = (err) => {
   return err;
 };
 export const transformResponse = (response) => {
-  if (response.statusCode === 200) {
+  if (response.statusCode === 200 || response.statusCode === 201) {
     if (response.message) {
       toast.success(response.message);
     }

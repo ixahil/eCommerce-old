@@ -22,6 +22,15 @@ const userApi = createApi({
         } catch (error) {}
       },
     }),
+    signupUser: builder.mutation({
+      query: (data) => ({
+        url: "signup",
+        method: "POST",
+        body: data,
+      }),
+      transformResponse: transformResponse,
+      transformErrorResponse: errorHandler,
+    }),
     loginUser: builder.mutation({
       query: ({ endpoint, data }) => ({
         url: endpoint,
@@ -131,6 +140,7 @@ export const {
   useUpdatePasswordMutation,
   useDeleteAccountMutation,
   useUpdateUserStatusMutation,
+  useSignupUserMutation,
 } = userApi;
 
 export default userApi;

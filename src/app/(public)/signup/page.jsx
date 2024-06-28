@@ -9,7 +9,10 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useLoginUserMutation } from "@/services/redux/api/user-api";
+import {
+  useLoginUserMutation,
+  useSignupUserMutation,
+} from "@/services/redux/api/user-api";
 import toast from "react-hot-toast";
 import Button from "@/components/ui/button";
 
@@ -34,7 +37,7 @@ const UserSchema = z
 const SignupPage = () => {
   const router = useRouter();
 
-  const [mutate, { isSuccess, isLoading }] = useLoginUserMutation();
+  const [mutate, { isSuccess, isLoading }] = useSignupUserMutation();
 
   const {
     register,
@@ -50,11 +53,11 @@ const SignupPage = () => {
   });
 
   const onSubmit = async (values) => {
-    const { data, error } = await mutate({ endpoint: "/signup", data: values });
+    const { data, error } = await mutate(values);
 
     if (data) {
-      toast.success("Registered & Loggedin Successfully!");
-      router.push("/user");
+      toast.success("Registered Successfully!");
+      router.push("/login");
     }
     if (error) {
       const [name = "", value = ""] = error.data.message.split(":");
