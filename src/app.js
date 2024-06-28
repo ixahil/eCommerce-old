@@ -11,6 +11,8 @@ import expressListEndpoints from "express-list-endpoints";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+const publicDirectoryPath = path.join(__dirname, "..", "public");
+
 const app = express();
 
 app.use(
@@ -26,10 +28,14 @@ app.use(
     credentials: true,
   })
 );
-app.use(express.static("./public"));
+
+app.use("/public", express.static(publicDirectoryPath));
+
+// app.use(express.static("/public"));
+
 app.set("views", path.join(__dirname, "../views"));
 
-// app.use("/public", express.static(path.join(__dirname, "public")));
+// app.use(express.static(path.join(__dirname, "..public")));
 
 app.use(express.json({ limit: "15mb" }));
 app.use(express.urlencoded({ extended: true, limit: "15mb" }));
